@@ -89,7 +89,7 @@ class DataTransformation:
 
             logging.info("data has been preprocessed")
 
-            return(train_arr, test_arr, self.data_transformation_config.preprocessor_obj_file_path)
+            return(train_arr, test_arr)
 
 
         except Exception as e:
