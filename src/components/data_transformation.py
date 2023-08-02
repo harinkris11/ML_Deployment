@@ -24,8 +24,8 @@ class DataTransformation:
     
     def get_transformer_obj(self):
         try:
-            num_features = ["writing score","reading score"]
-            cat_features = ["gender", "race/ethnicity", "parental level of education", "lunch", "test preparation course"]
+            num_features = ["writing_score","reading_score"]
+            cat_features = ["gender", "race_ethnicity", "parental_level_of_education", "lunch", "test_preparation_course"]
 
             num_pipeline = Pipeline(
                 steps = [
@@ -65,13 +65,8 @@ class DataTransformation:
 
             preprocess_obj = self.get_transformer_obj()
 
-            save_object(
-                file_path = self.data_transformation_config.preprocessor_obj_file_path,
-                obj = preprocess_obj
-            )
-
-            target = "math score"
-            num_features = ['writing score', 'reading score']
+            target = "math_score"
+            num_features = ['writing_score', 'reading_score']
 
             input_features_train = train_df.drop(columns = [target], axis = 1 )
             target_train = train_df[target]
@@ -88,6 +83,11 @@ class DataTransformation:
             test_arr = np.c_[input_feature_test_Arr, np.array(target_test)]
 
             logging.info("data has been preprocessed")
+
+            save_object(
+                file_path = self.data_transformation_config.preprocessor_obj_file_path,
+                obj = preprocess_obj
+            )
 
             return(train_arr, test_arr)
 

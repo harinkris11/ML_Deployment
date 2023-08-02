@@ -90,7 +90,8 @@ class modelTrainer():
             logging.info("model evaluation done")
 
             best_model_score = max(sorted(model_report.values()))
-            best_model = max(model_report)
+            best_model_name = max(model_report)
+            best_model = models[best_model_name]
 
             if best_model_score < 0.6:
                 raise CustomException("None of the models perform better")
@@ -102,9 +103,8 @@ class modelTrainer():
                 obj = best_model
             )
 
-            bestmodl = models[best_model]
 
-            predicted = bestmodl.predict(test_x)
+            predicted = best_model.predict(test_x)
             r2_sco = r2_score(predicted, test_y)
             return r2_sco
 
